@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="common_header(title)">
+    <title th:text="${title}">Roots for Recipes Hjemmeside</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../public/css/header-style.css" th:href="@{/css/header-style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header-left main-header" th:fragment="main-header">
+    <h1>
+        Roots for Recipes
+    </h1>
+</div>
+</body>
+</html>

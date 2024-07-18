@@ -18,8 +18,9 @@ public class Main {
         }).start(7070);
 
         // Routing
-        LoginController.addRoutes(app, ConnectionPool.getInstance());
-        CustomerController.addRoutes(app,ConnectionPool.getInstance());
+       // LoginController.addRoutes(app, ConnectionPool.getInstance());
+        //CustomerController.addRoutes(app,ConnectionPool.getInstance());
+        app.get("/", ctx -> ctx.render("start_page.html"));
 
     }
 }

@@ -11,8 +11,7 @@ public class CustomerController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("createuser", ctx -> ctx.render("create_user_page.html"));
-        app.get("/login_page", ctx -> ctx.render("login_page.html"));
-        /*
+        app.get("/login_page", ctx -> ctx.render("login_page.html"));/*
         app.post("createuser", ctx -> {
             createCustomer(ctx, connectionPool);
         });

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Forside</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/start_side-style.css" th:href="@{/css/start_side-style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <form th:action="@{/start_page}" method="POST">
+        <div class="start_container">
+            <div class="flexbox1">
+                <div class="flexbox2">
+                    <!--Add CustomerRequestPag th: href -->
+                    <a class="reference-format" th:href="@{/seeRecipes}">
+                        <div class="top-half">
+                            <h2>See your Recipes</h2>
+                        </div>
+                        <div class="bottom-half">
+                            <img class="option-images" src="../../public/images/seeRecipes"
+                                 th:src="@{/images/seeRecipes.jpg}"
+                                 alt="customer-request_logo">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="flexbox1">
+                <div class="flexbox2">
+                    <a class="reference-format" th:href="@{/addRecipes}">
+                        <div>
+                            <h2> Add new Recipes</h2>
+                        </div>
+                        <div>
+                            <img class="option-images" src="../../public/images/addRecipes"
+                                 th:src="@{/images/addRecipes.jpg}"
+                                 alt="order-history_logo">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

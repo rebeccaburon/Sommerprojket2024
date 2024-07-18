@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>CreateUser</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/create_user-style.css" th:href="@{/css/create_user-style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="create_user-container">
+    <div class="page">
+        <header>
+            <div>
+                <h2 style="font-size: 60px">Register!</h2>
+            </div>
+        </header>
+        <h4>Type in your information</h4>
+
+        <form action="/createuser" method="post">
+            <div class="form-group">
+                <div>
+                    <label>
+                        <input type="text" name="name" placeholder="Name*"/>
+                    </label><br><br>
+                    <label>
+                        <input type="text" name="lastname" placeholder="Last Name*"/>
+                    </label><br><br>
+                </div>
+                <div>
+                    <label>
+                        <input type="email" name="email" placeholder="E-mail*"/>
+                    </label><br><br>
+                    <label>
+                        <input type="email" name="email2" placeholder="Repeat E-mail*"/>
+                    </label><br><br>
+                </div>
+                <div>
+                    <label>
+                        <input type="text" name="password" placeholder="Password*"/>
+                    </label><br><br>
+                    <label>
+                        <input type="text" name="password2" placeholder="Repeat Password*"/>
+                    </label><br><br>
+                </div>
+            </div>
+            <div style="font-family: Helvetica, sans-serif; font-weight: bolder"><p th:text="${message}"></p></div>
+
+            <div class="form-group">
+                <input style="font-size: 20px" type="submit" value="Register now!">
+            </div>
+            <p style="font-family: Helvetica, sans-serif">Do you already have an account?
+                <a th:href="@{/login_page}">Go
+                back to login </a></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

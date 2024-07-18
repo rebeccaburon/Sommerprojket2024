@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.CustomerController;
 import app.controllers.LoginController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
@@ -18,6 +19,7 @@ public class Main {
 
         // Routing
         LoginController.addRoutes(app, ConnectionPool.getInstance());
+        CustomerController.addRoutes(app,ConnectionPool.getInstance());
 
     }
 }

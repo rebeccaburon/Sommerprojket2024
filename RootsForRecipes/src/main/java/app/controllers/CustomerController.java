@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.CustomerMapper;
 import app.validators.EmailValidator;
 import app.validators.PasswordValidator;
 import io.javalin.Javalin;
@@ -10,8 +11,8 @@ import io.javalin.http.Context;
 public class CustomerController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
-        app.get("createuser", ctx -> ctx.render("create_user_page.html"));
-        app.get("/login_page", ctx -> ctx.render("login_page.html"));/*
+        app.get("createuser", ctx -> ctx.render("create_customer_page.html"));
+        app.get("/login_page", ctx -> ctx.render("login_page.html"));
         app.post("createuser", ctx -> {
             createCustomer(ctx, connectionPool);
         });
@@ -21,45 +22,40 @@ public class CustomerController {
 
     private static void createCustomer(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
 
+        String name = ctx.formParam("name");
+        String lastName = ctx.formParam("lastname");
         String email = ctx.formParam("email");
         String email2 = ctx.formParam("email2");
-        String password1 = ctx.formParam("password1");
+        String password = ctx.formParam("password");
         String password2 = ctx.formParam("password2");
-        String firstName = ctx.formParam("firstName");
-        String lastName = ctx.formParam("lastName");
-        int zip = Integer.parseInt(ctx.formParam("zip"));
-        String cityName = ctx.formParam("cityName");
-        int phoneNumber = Integer.parseInt(ctx.formParam("phoneNumber"));
-        String address = ctx.formParam("address");
 
         if (EmailValidator.isValidEmail(email)) {
-            if (PasswordValidator.isValidPassword(password1)) {
-                if (password1.equals(password2)) {
+            if (PasswordValidator.isValidPassword(password)) {
+                if (password.equals(password2)) {
                     if (email.equals(email2)) {
                         try {
-                            CustomerMapper.createUser(email, password1, firstName, lastName, zip, address, phoneNumber, connectionPool);
-                            ctx.attribute("message", "Du er hermed oprettet med e-mail: " + email + ". Nu skal du logge på.");
-                            ctx.render("login/create-user-page.html");
+                            CustomerMapper.createUser(name, lastName, email, password, connectionPool);
+                            ctx.attribute("message", "E-mail: " + email + " is Registered. Go login!.");
+                            ctx.render("create_customer_page.html");
                         } catch (DatabaseException e) {
-                            ctx.attribute("message", "Den angivne e-mail findes allerede. Prøv igen, eller log ind");
-                            ctx.render("login/login-page.html");
+                            ctx.attribute("message", "E-mail already exists. Try again, or Log in");
+                            ctx.render("login_page.html");
                         }
                     } else {
-                        ctx.attribute("message", "Postnummer og by matcher ikke. Prøv igen.");
+                        ctx.attribute("message", "The emails do not match. Try again.");
+                        ctx.render("create_customer_page.html");
                     }
                 } else {
-                    ctx.attribute("message", "De indtastede mails mather ikke. Prøv igen.");
+                    ctx.attribute("message", "The passwords do not match. Try again.");
+                    ctx.render("create_customer_page.html");
                 }
             } else {
-                ctx.attribute("message", "De indtastede kodeord matcher ikke. Prøv igen.");
+                ctx.attribute("message", "The password is not valid. It has to be at least 8 characters long, contain one uppercase letter, one lowercase letter, and one number. Try again.");
+                ctx.render("create_customer_page.html");
             }
         } else {
-            ctx.attribute("message", "Den indtastede kodeord er ikke gyldig. Det skal minimum indeholde 8 tegn, et stort og et småt bogstav samt et tal. Prøv igen.");
+            ctx.attribute("message", "The email is not valid. Try again.");
+            ctx.render("create_customer_page.html");
         }
-    } else {
-        ctx.attribute("message", "Den indtastede mail er ikke gyldig. Prøv igen.");
-    }
-           ctx.render("login/create-user-page.html"); */
     }
 }
-
